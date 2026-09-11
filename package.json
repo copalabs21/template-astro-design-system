@@ -12,7 +12,15 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^7.3.2"
+    "@astrojs/markdown-satteri": "^0.4.1",
+    "@astrojs/mdx": "^8.0.1",
+    "@astrojs/sitemap": "^3.7.4",
+    "@playform/inline": "^0.1.0",
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "^7.3.2",
+    "globby": "^16.2.4",
+    "html-minifier-terser": "^7.2.0",
+    "tailwindcss": "^4.3.3"
   },
   "allowScripts": {
     "esbuild": true

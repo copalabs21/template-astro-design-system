@@ -1,0 +1,14 @@
+---
+import Head from "./head.astro"
+
+const { ...props } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+	<head>
+		<Head {...props} />
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>

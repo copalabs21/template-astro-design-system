@@ -1,0 +1,26 @@
+<script is:inline>
+//Script to forward query strings to all the links on the page
+document.addEventListener('DOMContentLoaded', () =>{
+    if (window.location.search){
+    const newParams = new URLSearchParams(window.location.search)
+    document.querySelectorAll("a").forEach(item => {
+
+        let href = item.href
+        let hashLink = item.getAttribute("href")?.startsWith("#")
+        
+        if (href && !hashLink){
+            
+            let link = new URL(href)
+            const isInternal = link.origin === window.location.origin
+            
+            newParams.forEach((value, key) => {link.searchParams.set(key,value)})
+            let newFullURL =  link.toString()
+            
+            //To keep the link internal
+            item.href = isInternal ? newFullURL.replace(window.location.origin,"") : newFullURL
+        }
+    })
+}
+})
+</script>
+    
