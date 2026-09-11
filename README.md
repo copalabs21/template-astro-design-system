@@ -66,8 +66,6 @@ You'll need to connect GitHub to Cloudflare via Dashboard. [Here is a complete t
 
 ## Environment variables
 SITE_NAME - The site name
-PUBLIC_PH_KEY - PostHog Public Key
-
 
 ## Motivation
 This is a starter template to meet the following requirements:
