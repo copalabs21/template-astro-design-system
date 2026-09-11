@@ -1,0 +1,31 @@
+---
+interface Props {
+  orientation?: "horizontal" | "vertical";
+  class?: string;
+}
+
+const { orientation = "horizontal", class: className } = Astro.props;
+
+const hasLabel = Astro.slots.has("default");
+---
+
+{
+  orientation === "vertical" ? (
+    <span
+      class:list={["inline-block w-px self-stretch bg-border", className]}
+      role="separator"
+      aria-orientation="vertical"
+    />
+  ) : hasLabel ? (
+    <div
+      class:list={["flex items-center gap-3 text-sm text-muted-foreground", className]}
+      role="separator"
+    >
+      <span class="h-px flex-1 bg-border" />
+      <slot />
+      <span class="h-px flex-1 bg-border" />
+    </div>
+  ) : (
+    <hr class:list={["border-t border-border", className]} />
+  )
+}

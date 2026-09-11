@@ -1,0 +1,23 @@
+---
+interface Props {
+  value: string | number;
+  label: string;
+  class?: string;
+}
+
+const { value, label, class: className } = Astro.props;
+
+const isNumeric = typeof value === "number" || /^[\d,.]+$/.test(String(value));
+---
+
+<div class:list={["text-center", className]}>
+  <p
+    class:list={[
+      "text-4xl font-semibold tracking-tight text-foreground",
+      isNumeric && "motion-number",
+    ]}
+  >
+    {value}
+  </p>
+  <p class="mt-1 text-sm text-muted-foreground">{label}</p>
+</div>

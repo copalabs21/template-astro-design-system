@@ -1,0 +1,24 @@
+---
+import Container from "@/components/atoms/Container.astro";
+import Stat from "@/components/molecules/Stat.astro";
+
+interface Item {
+  value: string | number;
+  label: string;
+}
+
+interface Props {
+  items: Item[];
+  class?: string;
+}
+
+const { items, class: className } = Astro.props;
+---
+
+<section class:list={["py-16 md:py-24", className]}>
+  <Container size="lg">
+    <div class="grid grid-cols-2 gap-8 md:grid-cols-4">
+      {items.map((item) => <Stat value={item.value} label={item.label} />)}
+    </div>
+  </Container>
+</section>

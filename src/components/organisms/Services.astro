@@ -1,0 +1,50 @@
+---
+import Container from "@/components/atoms/Container.astro";
+import Eyebrow from "@/components/atoms/Eyebrow.astro";
+import Heading from "@/components/atoms/Heading.astro";
+import Text from "@/components/atoms/Text.astro";
+import Link from "@/components/atoms/Link.astro";
+import ServiceCard from "@/components/molecules/ServiceCard.astro";
+
+interface Item {
+  title: string;
+  description: string;
+  href?: string;
+}
+
+interface Props {
+  eyebrow?: string;
+  heading: string;
+  text?: string;
+  items: Item[];
+  class?: string;
+}
+
+const { eyebrow, heading, text, items, class: className } = Astro.props;
+---
+
+<section class:list={["py-16 md:py-24", className]}>
+  <Container size="lg">
+    <div class="max-w-2xl space-y-4">
+      {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
+      <Heading as="h2" size="2xl">
+        {heading}
+      </Heading>
+      {text && <Text tone="muted">{text}</Text>}
+    </div>
+    <div class="motion-cards mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        items.map((item) => (
+          <ServiceCard title={item.title}>
+            {item.description}
+            {item.href && (
+              <Fragment slot="link">
+                <Link href={item.href}>Learn more</Link>
+              </Fragment>
+            )}
+          </ServiceCard>
+        ))
+      }
+    </div>
+  </Container>
+</section>

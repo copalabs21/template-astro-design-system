@@ -1,0 +1,25 @@
+---
+// Zero-JS accordion item, same <details>/<summary> disclosure pattern used
+// by the Header's mobile nav — no dependency needed for something this simple.
+interface Props {
+  question: string;
+  class?: string;
+}
+
+const { question, class: className } = Astro.props;
+---
+
+<details class:list={["group border-b border-border py-4", className]}>
+  <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-medium text-foreground">
+    {question}
+    <span
+      class="shrink-0 text-lg text-muted-foreground transition-transform group-open:rotate-45"
+      aria-hidden="true"
+    >
+      +
+    </span>
+  </summary>
+  <div class="mt-3 text-sm text-muted-foreground">
+    <slot />
+  </div>
+</details>

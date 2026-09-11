@@ -1,0 +1,31 @@
+---
+interface Item {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  links: Item[];
+  class?: string;
+}
+
+const { links, class: className } = Astro.props;
+---
+
+<ul class:list={["flex items-center gap-4", className]}>
+  {
+    links.map((link, i) => (
+      <li>
+        <a
+          href={link.href}
+          class="text-muted-foreground transition-colors hover:text-foreground"
+          aria-label={link.label}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <slot name={`icon-${i}`}>{link.label}</slot>
+        </a>
+      </li>
+    ))
+  }
+</ul>

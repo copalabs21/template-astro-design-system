@@ -1,0 +1,70 @@
+---
+import Container from "@/components/atoms/Container.astro";
+import BrandMark from "@/components/atoms/BrandMark.astro";
+import SocialLinks from "@/components/molecules/SocialLinks.astro";
+
+interface Column {
+  title: string;
+  links: { label: string; href: string }[];
+}
+
+interface Props {
+  columns?: Column[];
+  socialLinks?: { label: string; href: string }[];
+  class?: string;
+}
+
+const { columns = [], socialLinks = [], class: className } = Astro.props;
+
+const year = new Date().getFullYear();
+const hasLogo = Astro.slots.has("logo");
+---
+
+<footer class:list={["border-t border-border bg-background", className]}>
+  <Container size="xl">
+    <div class="grid gap-10 py-12 md:grid-cols-[2fr_repeat(auto-fit,minmax(120px,1fr))]">
+      <div class="space-y-4">
+        <div class="flex items-center gap-2 font-semibold text-foreground">
+          {
+            hasLogo ? (
+              <slot name="logo" />
+            ) : (
+              <>
+                <BrandMark size="sm" />
+                <span>Site Name</span>
+              </>
+            )
+          }
+        </div>
+        <p class="max-w-sm text-sm text-muted-foreground">
+          <slot />
+        </p>
+        {socialLinks.length > 0 && <SocialLinks links={socialLinks} />}
+      </div>
+
+      {
+        columns.map((col) => (
+          <div class="space-y-3">
+            <p class="text-sm font-medium text-foreground">{col.title}</p>
+            <ul class="space-y-2">
+              {col.links.map((link) => (
+                <li>
+                  <a
+                    href={link.href}
+                    class="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="border-t border-border py-6 text-sm text-muted-foreground">
+      &copy; {year} Site Name. All rights reserved.
+    </div>
+  </Container>
+</footer>

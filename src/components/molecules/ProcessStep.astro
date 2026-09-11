@@ -1,0 +1,19 @@
+---
+interface Props {
+  index: number | string;
+  title: string;
+  class?: string;
+}
+
+const { index, title, class: className } = Astro.props;
+
+const number = typeof index === "number" ? String(index).padStart(2, "0") : index;
+---
+
+<div class:list={["space-y-3", className]}>
+  <span class="font-mono text-sm text-primary">{number}</span>
+  <h3 class="font-semibold text-foreground">{title}</h3>
+  <p class="text-sm text-muted-foreground">
+    <slot />
+  </p>
+</div>

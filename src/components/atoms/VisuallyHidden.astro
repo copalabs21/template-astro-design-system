@@ -1,0 +1,14 @@
+---
+import type { HTMLTag } from "astro/types";
+
+interface Props {
+  as?: HTMLTag;
+  class?: string;
+}
+
+const { as: Tag = "span", class: className } = Astro.props;
+---
+
+<Tag class:list={["sr-only", className]}>
+  <slot />
+</Tag>

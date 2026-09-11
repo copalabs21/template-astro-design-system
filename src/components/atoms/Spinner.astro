@@ -1,0 +1,20 @@
+---
+interface Props {
+  size?: "sm" | "md";
+  class?: string;
+}
+
+const { size = "md", class: className } = Astro.props;
+
+const sizes = { sm: "size-4 border-2", md: "size-6 border-2" } as const;
+---
+
+<span
+  class:list={[
+    "inline-block animate-spin rounded-full border-primary border-t-transparent",
+    sizes[size],
+    className,
+  ]}
+  role="status"
+  aria-label="Loading"
+/>

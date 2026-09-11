@@ -1,0 +1,22 @@
+---
+import Container from "@/components/atoms/Container.astro";
+
+interface Props {
+  label?: string;
+  logos: string[];
+  class?: string;
+}
+
+const { label = "Trusted by teams at", logos, class: className } = Astro.props;
+---
+
+<section class:list={["border-y border-border py-10", className]}>
+  <Container size="lg">
+    <p class="text-center text-sm text-muted-foreground">{label}</p>
+    <div class="mt-6 flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
+      {logos.map((logo) => (
+        <span class="text-lg font-semibold text-muted-foreground/70">{logo}</span>
+      ))}
+    </div>
+  </Container>
+</section>

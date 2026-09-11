@@ -1,0 +1,12 @@
+export { default as CTASection } from "./CTASection.astro";
+export { default as FAQ } from "./FAQ.astro";
+export { default as FeatureGrid } from "./FeatureGrid.astro";
+export { default as Footer } from "./Footer.astro";
+export { default as Header } from "./Header.astro";
+export { default as Hero } from "./Hero.astro";
+export { default as LogoCloud } from "./LogoCloud.astro";
+export { default as Pricing } from "./Pricing.astro";
+export { default as Process } from "./Process.astro";
+export { default as Services } from "./Services.astro";
+export { default as StatsSection } from "./StatsSection.astro";
+export { default as TestimonialsSection } from "./TestimonialsSection.astro";

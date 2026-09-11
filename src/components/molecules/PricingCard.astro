@@ -1,0 +1,51 @@
+---
+import Button from "@/components/atoms/Button.astro";
+import Badge from "@/components/atoms/Badge.astro";
+
+interface Props {
+  name: string;
+  price: string;
+  period?: string;
+  ctaLabel: string;
+  ctaHref: string;
+  featured?: boolean;
+  class?: string;
+}
+
+const { name, price, period, ctaLabel, ctaHref, featured = false, class: className } = Astro.props;
+
+const hasFeatures = Astro.slots.has("default");
+---
+
+<div
+  class:list={[
+    "flex h-full flex-col gap-6 rounded-lg border bg-card p-6 text-card-foreground",
+    featured ? "border-primary ring-1 ring-primary" : "border-border",
+    className,
+  ]}
+>
+  <div class="space-y-2">
+    <div class="flex items-center gap-2">
+      <h3 class="font-semibold text-foreground">{name}</h3>
+      {featured && (
+        <Badge variant="primary" size="sm">
+          Popular
+        </Badge>
+      )}
+    </div>
+    <p class="flex items-baseline gap-1">
+      <span class="text-3xl font-semibold tracking-tight text-foreground">{price}</span>
+      {period && <span class="text-sm text-muted-foreground">/{period}</span>}
+    </p>
+  </div>
+  {
+    hasFeatures && (
+      <ul class="space-y-2 text-sm text-muted-foreground">
+        <slot />
+      </ul>
+    )
+  }
+  <Button as="a" href={ctaHref} variant={featured ? "primary" : "outline"} class="mt-auto">
+    {ctaLabel}
+  </Button>
+</div>

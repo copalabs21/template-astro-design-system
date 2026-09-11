@@ -1,0 +1,23 @@
+---
+import type { HTMLTag, Polymorphic } from "astro/types";
+
+type Props<Tag extends HTMLTag = "p"> = Polymorphic<{ as: Tag }> & {
+  size?: "sm" | "base" | "lg";
+  tone?: "default" | "muted";
+};
+
+const {
+  as: Tag = "p",
+  size = "base",
+  tone = "default",
+  class: className,
+  ...rest
+} = Astro.props;
+
+const sizes = { sm: "text-sm", base: "text-base", lg: "text-lg" } as const;
+const tones = { default: "text-foreground", muted: "text-muted-foreground" } as const;
+---
+
+<Tag class:list={["font-sans leading-relaxed", sizes[size], tones[tone], className]} {...rest}>
+  <slot />
+</Tag>

@@ -1,0 +1,33 @@
+---
+import Avatar from "@/components/atoms/Avatar.astro";
+
+interface Props {
+  quote: string;
+  name: string;
+  role?: string;
+  avatarSrc?: string;
+  class?: string;
+}
+
+const { quote, name, role, avatarSrc, class: className } = Astro.props;
+
+const initials = name
+  .split(" ")
+  .map((part) => part[0])
+  .slice(0, 2)
+  .join("")
+  .toUpperCase();
+---
+
+<figure
+  class:list={["space-y-4 rounded-lg border border-border bg-card p-6 text-card-foreground", className]}
+>
+  <blockquote class="text-sm leading-relaxed">"{quote}"</blockquote>
+  <figcaption class="flex items-center gap-3">
+    <Avatar src={avatarSrc} alt={name} fallback={initials} size="sm" />
+    <div>
+      <p class="text-sm font-medium text-foreground">{name}</p>
+      {role && <p class="text-xs text-muted-foreground">{role}</p>}
+    </div>
+  </figcaption>
+</figure>

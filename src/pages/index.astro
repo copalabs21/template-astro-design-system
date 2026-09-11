@@ -1,11 +1,41 @@
 ---
-import Layout from "@/layouts/main.astro"
+import Layout from "@/layouts/main.astro";
+import Header from "@/components/organisms/Header.astro";
+import Hero from "@/components/organisms/Hero.astro";
+import FeatureGrid from "@/components/organisms/FeatureGrid.astro";
+import Footer from "@/components/organisms/Footer.astro";
 
 const meta = {
-	title: "Home",
-	description: "Welcome to your Design System"
-}
+  title: "Home",
+  description: "A simple, semantic design system template for Astro + Tailwind.",
+};
+
+const features = [
+  {
+    title: "Semantic tokens",
+    description: "Colors, surfaces and text roles are named by purpose, not by hue — reskin a project by editing a handful of values in global.css.",
+  },
+  {
+    title: "Atomic components",
+    description: "Atoms, molecules and organisms in src/components give every project the same building blocks and conventions to start from.",
+  },
+  {
+    title: "Dark mode built in",
+    description: "Every token has a light and dark value out of the box, wired to the existing data-theme toggle in the navbar — no extra setup required.",
+  },
+];
 ---
+
 <Layout {meta}>
-	<h1>Design System</h1>	
+  <Header ctaLabel="Explore the design system" ctaHref="/design-system" />
+
+  <Hero
+    heading="A simple, semantic design system"
+    subheading="Design tokens, atomic components and dark mode — a clean foundation for your next project, not a finished design. This homepage is deliberately plain; the real reference lives on the design system page."
+    primaryCta={{ label: "Explore the design system", href: "/design-system" }}
+  />
+
+  <FeatureGrid items={features} class="bg-muted" />
+
+  <Footer>A simple, semantic design system template for Astro + Tailwind.</Footer>
 </Layout>

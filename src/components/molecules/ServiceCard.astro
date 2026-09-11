@@ -1,0 +1,37 @@
+---
+interface Props {
+  title: string;
+  class?: string;
+}
+
+const { title, class: className } = Astro.props;
+
+const hasIcon = Astro.slots.has("icon");
+const hasLink = Astro.slots.has("link");
+---
+
+<div
+  class:list={[
+    "flex h-full flex-col gap-4 rounded-lg border border-border bg-card p-6 text-card-foreground",
+    className,
+  ]}
+>
+  {
+    hasIcon && (
+      <div class="flex size-10 items-center justify-center rounded-md bg-primary/10 text-primary">
+        <slot name="icon" />
+      </div>
+    )
+  }
+  <div class="space-y-2">
+    <h3 class="font-semibold text-foreground">{title}</h3>
+    <p class="text-sm text-muted-foreground">
+      <slot />
+    </p>
+  </div>
+  {hasLink && (
+    <div class="mt-auto pt-2 text-sm">
+      <slot name="link" />
+    </div>
+  )}
+</div>

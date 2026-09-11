@@ -1,0 +1,62 @@
+---
+import Container from "@/components/atoms/Container.astro";
+import Eyebrow from "@/components/atoms/Eyebrow.astro";
+import Heading from "@/components/atoms/Heading.astro";
+import Text from "@/components/atoms/Text.astro";
+import PricingCard from "@/components/molecules/PricingCard.astro";
+
+interface Plan {
+  name: string;
+  price: string;
+  period?: string;
+  features: string[];
+  ctaLabel: string;
+  ctaHref: string;
+  featured?: boolean;
+}
+
+interface Props {
+  eyebrow?: string;
+  heading: string;
+  text?: string;
+  plans: Plan[];
+  class?: string;
+}
+
+const { eyebrow, heading, text, plans, class: className } = Astro.props;
+---
+
+<section class:list={["py-16 md:py-24", className]}>
+  <Container size="lg">
+    <div class="mx-auto max-w-2xl space-y-4 text-center">
+      {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
+      <Heading as="h2" size="2xl">
+        {heading}
+      </Heading>
+      {text && <Text tone="muted">{text}</Text>}
+    </div>
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
+      {
+        plans.map((plan) => (
+          <PricingCard
+            name={plan.name}
+            price={plan.price}
+            period={plan.period}
+            ctaLabel={plan.ctaLabel}
+            ctaHref={plan.ctaHref}
+            featured={plan.featured}
+          >
+            {plan.features.map((feature) => (
+              <li class="flex gap-2">
+                <span class="text-primary" aria-hidden="true">
+                  +
+                </span>
+                {feature}
+              </li>
+            ))}
+          </PricingCard>
+        ))
+      }
+    </div>
+  </Container>
+</section>

@@ -1,0 +1,15 @@
+---
+// A default logo placeholder: a plain primary-color disc. Swap it for a
+// real logo via the `logo` slot on Header/Footer — this exists so the
+// template doesn't ship with a blank box.
+interface Props {
+  size?: "sm" | "md" | "lg";
+  class?: string;
+}
+
+const { size = "md", class: className } = Astro.props;
+
+const sizes = { sm: "size-6", md: "size-8", lg: "size-12" } as const;
+---
+
+<span class:list={["inline-block shrink-0 rounded-full bg-primary", sizes[size], className]} aria-hidden="true" />

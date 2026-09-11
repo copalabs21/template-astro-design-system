@@ -1,0 +1,45 @@
+---
+// Cycles light/dark using the global setLightMode()/setDarkMode() functions
+// already defined by src/layouts/scripts/darkMode.astro. Icon visibility is
+// handled entirely by the dark: variant (keyed to data-theme in global.css),
+// so no client script is needed beyond the click handler itself.
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<button
+  type="button"
+  class:list={[
+    "inline-flex size-9 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:bg-muted",
+    className,
+  ]}
+  aria-label="Toggle color theme"
+  onclick="document.documentElement.dataset.theme === 'dark' ? setLightMode() : setDarkMode()"
+>
+  <svg
+    class="size-4 dark:hidden"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.6"
+    aria-hidden="true"
+  >
+    <circle cx="12" cy="12" r="4.4"></circle>
+    <path
+      d="M12 2.5v2.6M12 18.9v2.6M2.5 12h2.6M18.9 12h2.6M4.9 4.9l1.9 1.9M17.2 17.2l1.9 1.9M19.1 4.9l-1.9 1.9M6.8 17.2l-1.9 1.9"
+    ></path>
+  </svg>
+  <svg
+    class="hidden size-4 dark:block"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.6"
+    aria-hidden="true"
+  >
+    <path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"></path>
+  </svg>
+</button>

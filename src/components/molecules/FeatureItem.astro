@@ -1,0 +1,24 @@
+---
+interface Props {
+  title: string;
+  class?: string;
+}
+
+const { title, class: className } = Astro.props;
+
+const hasIcon = Astro.slots.has("icon");
+---
+
+<div class:list={["space-y-2", className]}>
+  {
+    hasIcon && (
+      <div class="flex size-10 items-center justify-center rounded-md bg-primary/10 text-primary">
+        <slot name="icon" />
+      </div>
+    )
+  }
+  <h3 class="font-semibold text-foreground">{title}</h3>
+  <p class="text-sm text-muted-foreground">
+    <slot />
+  </p>
+</div>

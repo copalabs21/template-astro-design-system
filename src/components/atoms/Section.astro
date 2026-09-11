@@ -1,0 +1,19 @@
+---
+import type { HTMLTag, Polymorphic } from "astro/types";
+
+type Props<Tag extends HTMLTag = "section"> = Polymorphic<{ as: Tag }> & {
+  tone?: "default" | "muted" | "primary";
+};
+
+const { as: Tag = "section", tone = "default", class: className, ...rest } = Astro.props;
+
+const tones = {
+  default: "bg-background text-foreground",
+  muted: "bg-muted text-foreground",
+  primary: "bg-primary text-primary-foreground",
+} as const;
+---
+
+<Tag class:list={["py-16 md:py-24", tones[tone], className]} {...rest}>
+  <slot />
+</Tag>

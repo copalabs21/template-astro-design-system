@@ -6,7 +6,7 @@ import { inView, animate, stagger } from "motion";
  * Animates a number counting from 0 to its final value on scroll into view.
  */
 inView(".motion-number", (element) => {
-    const el = element.target as HTMLElement;
+    const el = element as HTMLElement;
     const endNumber = Number(el.innerHTML.replaceAll(",", ""));
 
     animate(0, endNumber, {
@@ -24,7 +24,7 @@ inView(".motion-number", (element) => {
  * @example <span class='motion-spin'>$</span>
  */
 inView(".motion-spin", (element) => {
-    animate(element.target,
+    animate(element,
         {
             display: "inline-block",
             rotateY: 360 * 8
@@ -49,24 +49,24 @@ inView(".motion-spin", (element) => {
  * @param container - the div tagged with ".motion-cards" (card**s**, plural)
  * @returns a NodeList - the selected cards inside the container
  */
-const selectCards = (container: Element) => container.querySelectorAll('.motion-card').length 
-    ? container.querySelectorAll('.motion-card') 
-    : container.querySelectorAll('div');
+const selectCards = (container: Element) => container.querySelectorAll('.motion-card').length
+    ? container.querySelectorAll('.motion-card')
+    : container.querySelectorAll(':scope > div');
 
 document.querySelectorAll('.motion-cards').forEach(container => {
     const cards = selectCards(container)
     cards.forEach(card => (card as HTMLElement).style.opacity = '0')
 });
 
-inView(".motion-cards", (entry) => {
-    const cards = selectCards(entry.target)
+inView(".motion-cards", (element) => {
+    const cards = selectCards(element)
     const isMobile = window.matchMedia('(max-width: 640px)').matches
 
     if (isMobile) {
         // Animate each card individually as it comes into view
         cards.forEach(card => {
-            inView(card, ({ target }) => {
-                animate(target, { opacity: [0, 1], x: [-60, 0] }, {
+            inView(card, (cardElement) => {
+                animate(cardElement, { opacity: [0, 1], x: [-60, 0] }, {
                     duration: 1,
                     ease: "easeOut"
                 });
@@ -99,7 +99,7 @@ inView(".motion-cards", (entry) => {
  */
 document.querySelectorAll('.motion-slide-from-left').forEach(card => (card as HTMLElement).style.opacity = '0')
 inView(".motion-slide-from-left", (el) => {
-    animate(el.target, { opacity: [0, 1], x: [-160, 0] }, {
+    animate(el, { opacity: [0, 1], x: [-160, 0] }, {
         duration: 0.8,
         ease: "easeOut"
     });
@@ -111,7 +111,7 @@ inView(".motion-slide-from-left", (el) => {
  */
 document.querySelectorAll('.motion-slide-from-right').forEach(card => (card as HTMLElement).style.opacity = '0')
 inView(".motion-slide-from-right", (el) => {
-    animate(el.target, { opacity: [0, 1], x: [160, 0] }, {
+    animate(el, { opacity: [0, 1], x: [160, 0] }, {
         duration: 0.8,
         ease: "easeOut"
     });
@@ -122,7 +122,7 @@ inView(".motion-slide-from-right", (el) => {
  * @example <div class='motion-slide-up'></div>
  */
 document.querySelectorAll('.motion-slide-up').forEach(card => (card as HTMLElement).style.opacity = '0')
-inView(".motion-slide-up", ({ target }) => {
+inView(".motion-slide-up", (target) => {
     animate(target, { opacity: [0, 1], y: [200, 0] }, {
         duration: 1,
         ease: "easeOut"
@@ -139,7 +139,7 @@ inView(".motion-slide-up", ({ target }) => {
  * @example <div class='motion-grow'></div>
  */
 inView(".motion-grow", (el) => {
-    animate(el.target, { scaleX: [0, 1]}, {
+    animate(el, { scaleX: [0, 1]}, {
         duration: 0.8,
         ease: "easeOut"
     });

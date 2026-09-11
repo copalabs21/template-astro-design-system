@@ -1,0 +1,46 @@
+---
+import Section from "@/components/atoms/Section.astro";
+import Container from "@/components/atoms/Container.astro";
+import Heading from "@/components/atoms/Heading.astro";
+import Text from "@/components/atoms/Text.astro";
+import Button from "@/components/atoms/Button.astro";
+
+interface Cta {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  heading: string;
+  text?: string;
+  cta: Cta;
+  tone?: "default" | "primary";
+  class?: string;
+}
+
+const { heading, text, cta, tone = "primary", class: className } = Astro.props;
+---
+
+<Section tone={tone} class={className}>
+  <Container size="md">
+    <div class="space-y-6 text-center">
+      <Heading as="h2" size="2xl">
+        {heading}
+      </Heading>
+      {text && (
+        <Text
+          size="lg"
+          tone={tone === "primary" ? "default" : "muted"}
+          class={tone === "primary" ? "opacity-90" : undefined}
+        >
+          {text}
+        </Text>
+      )}
+      <div>
+        <Button as="a" href={cta.href} size="lg" variant={tone === "primary" ? "secondary" : "primary"}>
+          {cta.label}
+        </Button>
+      </div>
+    </div>
+  </Container>
+</Section>

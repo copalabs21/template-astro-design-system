@@ -1,0 +1,33 @@
+---
+interface Props {
+  padding?: "sm" | "md" | "lg";
+  class?: string;
+}
+
+const { padding = "md", class: className } = Astro.props;
+
+const paddings = { sm: "p-4", md: "p-6", lg: "p-8" } as const;
+
+const hasHeader = Astro.slots.has("header");
+const hasFooter = Astro.slots.has("footer");
+---
+
+<div class:list={["rounded-lg border border-border bg-card text-card-foreground", className]}>
+  {
+    hasHeader && (
+      <div class:list={["border-b border-border", paddings[padding]]}>
+        <slot name="header" />
+      </div>
+    )
+  }
+  <div class:list={[paddings[padding]]}>
+    <slot />
+  </div>
+  {
+    hasFooter && (
+      <div class:list={["border-t border-border", paddings[padding]]}>
+        <slot name="footer" />
+      </div>
+    )
+  }
+</div>

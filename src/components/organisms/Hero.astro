@@ -1,0 +1,60 @@
+---
+import Container from "@/components/atoms/Container.astro";
+import Eyebrow from "@/components/atoms/Eyebrow.astro";
+import Heading from "@/components/atoms/Heading.astro";
+import Text from "@/components/atoms/Text.astro";
+import Button from "@/components/atoms/Button.astro";
+
+interface Cta {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  eyebrow?: string;
+  heading: string;
+  subheading?: string;
+  primaryCta?: Cta;
+  secondaryCta?: Cta;
+  class?: string;
+}
+
+const { eyebrow, heading, subheading, primaryCta, secondaryCta, class: className } = Astro.props;
+
+const hasMedia = Astro.slots.has("media");
+---
+
+<section class:list={["py-16 md:py-24", className]}>
+  <Container size="lg">
+    <div class:list={["grid gap-10", hasMedia && "md:grid-cols-2 md:items-center"]}>
+      <div class="motion-slide-up max-w-2xl space-y-6">
+        {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
+        <Heading as="h1" size="4xl">{heading}</Heading>
+        {subheading && (
+          <Text size="lg" tone="muted">
+            {subheading}
+          </Text>
+        )}
+        {(primaryCta || secondaryCta) && (
+          <div class="flex flex-wrap gap-3">
+            {primaryCta && (
+              <Button as="a" href={primaryCta.href} size="lg">
+                {primaryCta.label}
+              </Button>
+            )}
+            {secondaryCta && (
+              <Button as="a" href={secondaryCta.href} size="lg" variant="outline">
+                {secondaryCta.label}
+              </Button>
+            )}
+          </div>
+        )}
+      </div>
+      {hasMedia && (
+        <div>
+          <slot name="media" />
+        </div>
+      )}
+    </div>
+  </Container>
+</section>

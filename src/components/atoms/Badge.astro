@@ -1,0 +1,35 @@
+---
+interface Props {
+  variant?: "primary" | "secondary" | "accent" | "success" | "warning" | "danger" | "neutral";
+  size?: "sm" | "md";
+  class?: string;
+}
+
+const { variant = "neutral", size = "md", class: className } = Astro.props;
+
+const variants = {
+  primary: "bg-primary text-primary-foreground",
+  secondary: "bg-secondary text-secondary-foreground",
+  accent: "bg-accent text-accent-foreground",
+  success: "bg-success text-success-foreground",
+  warning: "bg-warning text-warning-foreground",
+  danger: "bg-danger text-danger-foreground",
+  neutral: "bg-muted text-muted-foreground",
+} as const;
+
+const sizes = {
+  sm: "px-2 py-0.5 text-xs",
+  md: "px-2.5 py-1 text-sm",
+} as const;
+---
+
+<span
+  class:list={[
+    "inline-flex items-center rounded-full font-medium",
+    variants[variant],
+    sizes[size],
+    className,
+  ]}
+>
+  <slot />
+</span>
