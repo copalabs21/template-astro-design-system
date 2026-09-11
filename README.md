@@ -13,42 +13,10 @@
 
 ## Quick Start
 
-There are 3 install options:
+Deploy now to Cloudflare Workers clicking on the button below:
 
-### 1. Deploy now to Cloudflare Workers clicking on the button below
+[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/copalabs21/template-astro-design-system)
 
-
-### 2. Via CLI
-`npm create cloudflare@latest -- my-astro-app --framework=astro --template=copalabs21/template-astro-design-system`
-
-When prompted...
-
-_What would you like to start with?_
-
-`> Template from a GitHub repo`
-
-_What's the url of git repo containing the template you'd like to use?_
-
-`copalabs21/template-astro-design-system`
-
-_Do you want to deploy your application?_
-
-`> No` (so you can later connect to your GitHub repo)
-
-You can be prompted about logging into Cloudflare and/or Github.
-
-You'll need to connect GitHub to Cloudflare via Dashboard. [Here is a complete tutorial.](https://developers.cloudflare.com/pages/framework-guides/deploy-an-astro-site/)
-
-### 3. Via Github and Cloudflare Dashboard
-1. Go to https://github.com/copalabs21/template-astro-design-system
-2. Click on the "Use this Template" button and configure the name and visibility of your new repo
-3. Go to https://dash.cloudflare.com/ > Your Account > + Add (top right of the screen) > Workers
-4. Connect to Git
-5. Choose the repo
-6. Name your project
-7. Framework preset: Astro
-8. Deploy!
-9. Enable Web Analytics at Metrics > Web Analytics (optional)
 
 ## For local development with VSCode, go to the IDE command line and run:
 
